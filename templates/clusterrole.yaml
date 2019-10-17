@@ -1,0 +1,19 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  labels:
+    app: {{ template "oidc-gateway.name" . }}
+    chart: {{ template "oidc-gateway.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  name: {{ template "oidc-gateway.fullname" . }}
+rules:
+  - apiGroups:
+    - policy
+    resourceNames:
+    - {{ template "oidc-gateway.fullname" . }}
+    resources:
+    - podsecuritypolicies
+    verbs:
+    - use 
+  

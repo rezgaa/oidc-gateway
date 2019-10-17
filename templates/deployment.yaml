@@ -23,6 +23,11 @@ spec:
         type: {{ template "oidc-gateway.name" . }}
         release: {{ .Release.Name }}
     spec:
+      securityContext:
+        fsGroup: 0
+        runAsUser: 0
+      serviceAccount: {{ template "oidc-gateway.fullname" . }}
+      serviceAccountName: {{ template "oidc-gateway.fullname" . }}
       volumes:
         - name: config
           configMap:

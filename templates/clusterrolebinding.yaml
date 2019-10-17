@@ -1,0 +1,17 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ template "oidc-gateway.fullname" . }}
+  labels:
+    app: {{ template "oidc-gateway.name" . }}
+    chart: {{ template "oidc-gateway.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ template "oidc-gateway.fullname" . }}
+    namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ template "oidc-gateway.fullname" . }}
+  apiGroup: rbac.authorization.k8s.io
